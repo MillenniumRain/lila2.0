@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.begin_card {
+	position: absolute;
+	left: -90px;
+	bottom: 0;
+}
+
+.abs {
+	position: absolute;
+}
