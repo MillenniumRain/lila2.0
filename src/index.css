@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* #popup {
+	position: relative;
+	z-index: 10;
+} */
 .begin_card {
 	position: absolute;
 	left: -90px;
@@ -10,4 +14,8 @@
 
 .abs {
 	position: absolute;
+}
+
+.active {
+	height: 168px;
 }

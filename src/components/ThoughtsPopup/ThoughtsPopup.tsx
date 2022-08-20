@@ -15,7 +15,8 @@ const ThoughtsPopup = ({}: ThoughtsPopupProp) => {
 	return (
 		<div className='overflow-x-auto'>
 			<Popup
-				onClose={() => {
+				onClose={(e) => {
+					e.preventDefault();
 					dispatch(interfaceSlice.actions.setThoughtsPopup({ visible: false }));
 				}}>
 				<div>
@@ -30,12 +31,22 @@ const ThoughtsPopup = ({}: ThoughtsPopupProp) => {
 					</div>
 					{visibleShirt && (
 						<div className=' relative max-w-[650px] min-h-[400px]  rounded-3xl overflow-hidden   '>
-							<ThoughtsShirt />
+							<ThoughtsShirt
+								onContextMenu={(e) => {
+									e.preventDefault();
+									setVisibleShirt((prev) => !prev);
+								}}
+							/>
 						</div>
 					)}
 					{!visibleShirt && (
-						<div className='bg-white relative max-w-[650px] min-h-[449px]  h-[449px] rounded-3xl overflow-hidden   '>
-							<ThoughtsList />
+						<div className='bg-white relative max-w-[650px] min-h-[452px]  h-[452px] rounded-3xl overflow-hidden   '>
+							<ThoughtsList
+								onContextMenu={(e) => {
+									e.preventDefault();
+									setVisibleShirt((prev) => !prev);
+								}}
+							/>
 						</div>
 					)}
 				</div>

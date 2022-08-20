@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+
 import gameReducer from './reducers/GameSlice';
 import interfaceReducer from './reducers/InterfaceSlice';
 
@@ -7,6 +8,13 @@ export const store = configureStore({
 		game: gameReducer,
 		interface: interfaceReducer,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: ['game/setSocket'],
+				ignoredPaths: ['game.socket'],
+			},
+		}),
 });
 
 export type AppDispatch = typeof store.dispatch;

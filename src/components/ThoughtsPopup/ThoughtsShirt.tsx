@@ -1,17 +1,18 @@
-import React, { ReactNode } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 import CardImg from '../../common/CardImg';
 import { useAppSelector } from '../../hooks/hooks';
 import Arrows from './Arrows';
 
 interface ThoughtsShirtProp {
 	children?: ReactNode;
+	onContextMenu: (e: MouseEvent) => void;
 }
 
-const ThoughtsShirt = ({}: ThoughtsShirtProp) => {
+const ThoughtsShirt = ({ onContextMenu }: ThoughtsShirtProp) => {
 	const activeCardId = useAppSelector((state) => state.interface.activeCard) || 0;
 	return (
-		<div className={`w-full flex justify-center`}>
-			<Arrows className={`hover:bg-black/20`} id={activeCardId} />
+		<div className={`w-full flex justify-center`} onContextMenu={onContextMenu}>
+			{/* <Arrows className={`hover:bg-black/20`} id={activeCardId} /> */}
 			<CardImg id={activeCardId} />
 		</div>
 	);

@@ -8,8 +8,8 @@ interface FigureProp {
 	animation?: boolean;
 }
 
-const Figure = ({ id, className }: FigureProp) => {
-	return <div className={className}>{figures[id]}</div>;
+const Figure = ({ id, className, animation }: FigureProp) => {
+	return <div className={`${className}  ${animation && 'animate-spin-slow'}`}>{figures[id]}</div>;
 };
 
 export default Figure;

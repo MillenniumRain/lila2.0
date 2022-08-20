@@ -1,27 +1,26 @@
 import React, { ReactNode } from 'react';
 import { useAppSelector } from '../../hooks/hooks';
+import { IPLayer } from '../../store/reducers/GameSlice';
 import Figure from '../Figure';
 
 interface PositionProp {
 	children?: ReactNode;
 	id: number;
+	players: IPLayer[];
 }
 
-const Position = ({ id }: PositionProp) => {
-	const players = useAppSelector((state) => state.game.players);
-
+const Position = ({ id, players }: PositionProp) => {
 	return (
 		<>
-			{players?.length &&
-				players.map((player) => {
-					if (player.position === id)
-						return (
-							<div className=' text-lg' style={{ color: player.color }} key={player.id}>
-								<Figure className='w-[30px]' id={player.figure - 1} />
-							</div>
-						);
-					return '';
-				})}
+			{players.map((player) => {
+				if (player.position === id)
+					return (
+						<div className=' text-lg' style={{ color: player.color }} key={player.id}>
+							<Figure animation={!player.disconnected} className='w-[30px]' id={player.figure} />
+						</div>
+					);
+				return '';
+			})}
 		</>
 	);
 };

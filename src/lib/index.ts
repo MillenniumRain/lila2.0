@@ -24,4 +24,15 @@ export const getMap = (): ICard[] => {
 	});
 };
 
+export const random = (min: number, max: number): number => {
+	let rand = min + Math.random() * (max + 1 - min);
+	return Math.floor(rand);
+};
 export const drawMap = () => {};
+
+export const getLocalStorage = (session: string = '', key: string = '') => {
+	if (!key) {
+		return JSON.parse(localStorage.getItem(session) || '{}');
+	}
+	return JSON.parse(localStorage.getItem(session) || '')[key];
+};

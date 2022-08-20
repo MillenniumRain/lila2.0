@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { gameSlice, IHistoryList } from '../../store/reducers/GameSlice';
 import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
@@ -6,19 +6,20 @@ import Arrows from './Arrows';
 
 interface ThoughtsListProp {
 	children?: ReactNode;
+	onContextMenu: (e: MouseEvent) => void;
 }
 
-const ThoughtsList = ({}: ThoughtsListProp) => {
+const ThoughtsList = ({ onContextMenu }: ThoughtsListProp) => {
 	const dispatch = useAppDispatch();
 	const activeCardId = useAppSelector((state) => state.interface.activeCard) || 0;
 	const { name, description, id } = useAppSelector((state) => state.game.gameMap[activeCardId]);
 	const pickedIdThought = useAppSelector((state) => state.interface.pickedIdThought);
 
 	return (
-		<div className='px-20 h-full'>
-			<Arrows id={id} />
-			<div className=' relative h-full overflow-x-auto p-4'>
-				<div className='mb-5 text-lg font-bold'>
+		<div className='px-[50px] h-full ' onContextMenu={onContextMenu}>
+			{/* <Arrows id={id} /> */}
+			<div className=' relative h-full overflow-x-auto py-4'>
+				<div className='mb-5 text-lg font-bold px-1 '>
 					{id}. {name}
 				</div>
 				{description?.map((thought) => {
@@ -26,7 +27,7 @@ const ThoughtsList = ({}: ThoughtsListProp) => {
 					if (pickedIdThought) setThoughtObj.id = pickedIdThought;
 					return (
 						<div
-							className='mb-3 border-4 p-2 cursor-pointer hover:bg-slate-200 last:mb-0 '
+							className='mt-[-2px] border-2 p-2 cursor-pointer hover:bg-slate-200 last:mb-0 '
 							key={thought.id}
 							onClick={(e) => {
 								dispatch(interfaceSlice.actions.setThoughtsPopup({ visible: false }));

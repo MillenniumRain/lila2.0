@@ -5,6 +5,8 @@ interface IInterface {
 	thoughtsPopup: boolean;
 	activeCard: number | null;
 	pickedIdThought: number | null;
+	loginPopup: boolean;
+	playerName: string;
 }
 interface ThoughtsPayload {
 	visible: boolean;
@@ -17,8 +19,10 @@ interface HistoryPayload {
 const initialState: IInterface = {
 	historyPopup: false,
 	thoughtsPopup: false,
+	loginPopup: true,
 	activeCard: null,
 	pickedIdThought: null,
+	playerName: '',
 };
 export const interfaceSlice = createSlice({
 	name: 'interface',
@@ -30,9 +34,15 @@ export const interfaceSlice = createSlice({
 		setHistoryPopup: (state, action: PayloadAction<HistoryPayload>) => {
 			state.historyPopup = action.payload.visible;
 		},
+
+		setLoginPopup: (state, action: PayloadAction<HistoryPayload>) => {
+			state.loginPopup = action.payload.visible;
+		},
 		setThoughtsPopup: (state, action: PayloadAction<ThoughtsPayload>) => {
 			state.thoughtsPopup = action.payload.visible;
-			if (action.payload.activeCard) {
+			console.log(action.payload.activeCard);
+
+			if (action.payload.activeCard && action.payload.activeCard >= 0) {
 				state.activeCard = action.payload.activeCard;
 			}
 			if (action.payload.pickedIdThought) {

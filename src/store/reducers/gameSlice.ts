@@ -1,5 +1,7 @@
+import { figures } from './../../data/figures';
+import { websocketAPI } from './../../lib/websocketAPI';
 import { getMap } from '../../lib/index';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IDescription {
 	id: number;
@@ -16,14 +18,15 @@ export interface ICard {
 	hexagram_color: string;
 }
 
-interface IPLayer {
-	id: number;
+export interface IPLayer {
+	id?: string;
 	name: string;
 	color: string;
-	bg: string;
 	position: number;
 	figure: number;
 	turn: boolean;
+	dice: number | null;
+	disconnected: boolean;
 }
 interface IHistory {
 	lastId: number;
@@ -35,77 +38,141 @@ export interface IHistoryList {
 	thoughtId?: number;
 }
 interface GameState {
-	id: number;
+	name: string;
+	dice: number;
+	id: string;
 	gameMap: ICard[];
 	players: IPLayer[];
 	history: IHistory;
+	figure: number;
+	sessionId: string;
+	socket: WebSocket | null;
+}
+interface IPlayerSocket {
+	id: string;
+	players: IPLayer[];
+}
+interface MovePayload {
+	cardId: number;
+	playerId?: string;
 }
 const initialState: GameState = {
-	id: 3,
+	id: '',
+	name: '',
+	figure: 0,
+	dice: 0,
 	gameMap: getMap(),
+	socket: null,
+	sessionId: '',
 	history: {
 		lastId: 6,
-		list: [
-			{ id: 1, cardId: 3, thoughtId: 2 },
-			{ id: 2, cardId: 4, thoughtId: 1 },
-			{ id: 3, cardId: 34, thoughtId: 4 },
-			{ id: 4, cardId: 16, thoughtId: 4 },
-			{ id: 5, cardId: 34, thoughtId: 4 },
-			{ id: 6, cardId: 16, thoughtId: 4 },
-		],
+		list: [],
 	},
-	players: [
-		{
-			id: 1,
-			name: 'Игрок 1',
-			color: '#fff',
-			bg: '#000',
-			position: 2,
-			figure: 1,
-			turn: false,
-		},
-		{
-			id: 2,
-			name: 'Анастасия',
-			color: '#000',
-			bg: '#fff',
-			position: 3,
-			figure: 2,
-			turn: false,
-		},
-		{
-			id: 3,
-			name: 'Никита',
-			color: '#ff00ff',
-			bg: '#cac',
-			position: 2,
-			figure: 2,
-			turn: true,
-		},
-	],
+	players: [],
 };
-console.log(initialState.gameMap);
+
 export const gameSlice = createSlice({
 	name: 'game',
 	initialState,
 	reducers: {
-		move: (state, action: PayloadAction<number>) => {
-			const index = state.players.findIndex((player) => player.id === state.id) || 0;
-			state.players[index].position = action.payload;
+		setSessionId: (state, action: PayloadAction<string>) => {
+			state.sessionId = action.payload;
+		},
+		setSocket: (state, action: PayloadAction<WebSocket>) => {
+			state.socket = action.payload;
+		},
+		updatePlayers: (state, action: PayloadAction<IPlayerSocket>) => {
+			state.players = action.payload.players;
+			state.id = action.payload.id;
+		},
+		disconnected: (state) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'disconnected',
+					sessionId: state.sessionId,
+					playerId: state.id,
+				})
+			);
+		},
 
-			const id = state.history.lastId;
-			state.history.list.push({ id: id + 1, cardId: action.payload });
-			state.history.lastId = id + 1;
+		//******************************/
+
+		move: (state, action: PayloadAction<MovePayload>) => {
+			const cardId = action.payload.cardId;
+			const id = action.payload.playerId || state.id;
+			const index = state.players.findIndex((player) => player.id === id) || 0;
+
+			if (state.players[index].position === cardId) return;
+			if (!state.players[index].turn) return;
+
+			state.socket?.send(
+				JSON.stringify({
+					method: 'setposition',
+					sessionId: state.sessionId,
+					playerId: id,
+					position: cardId,
+				})
+			);
+
+			if (!action.payload.playerId) {
+				const lastId = state.history.lastId;
+				state.history.list.push({ id: lastId + 1, cardId: cardId });
+				state.history.lastId = lastId + 1;
+			}
 		},
 		setThought: (state, action: PayloadAction<IHistoryList>) => {
-			console.log(action.payload);
-
 			const id = action.payload.id ? action.payload.id : state.history.lastId;
-			const index = state.history.list.findIndex((thought) => thought.id === id) || 0;
+			const index = state.history.list.findIndex((thought) => thought.id === id);
 
 			if (index > -1) {
 				state.history.list[index].thoughtId = action.payload.thoughtId;
 			}
+		},
+		setDice: (state, action: PayloadAction<number>) => {
+			const index = state.players.findIndex((player) => player.id === state.id);
+			state.socket?.send(
+				JSON.stringify({
+					method: 'setdice',
+					sessionId: state.sessionId,
+					playerId: state.id,
+					dice: action.payload,
+				})
+			);
+			state.dice = action.payload;
+		},
+		setPlayers: (state, action: PayloadAction<IPlayerSocket>) => {
+			const players = action.payload.players;
+			state.id = action.payload.id;
+
+			const index = players.findIndex((player) => player.id === action.payload.id);
+			if (index > -1) {
+				localStorage.setItem(state.sessionId, JSON.stringify(players[index]));
+			}
+			state.players = players;
+		},
+		completeTheTurn: (state) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'completemove',
+					sessionId: state.sessionId,
+					playerId: state.id,
+				})
+			);
+		},
+		setTurn: (state, action: PayloadAction<string>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'setturn',
+					sessionId: state.sessionId,
+					playerId: action.payload,
+				})
+			);
+		},
+		setFigure: (state, action: PayloadAction<number>) => {
+			state.figure = action.payload;
+		},
+		setPLayerName: (state, action: PayloadAction<string>) => {
+			state.name = action.payload;
 		},
 	},
 });
