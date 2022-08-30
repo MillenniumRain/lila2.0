@@ -1,4 +1,4 @@
-import React, { createRef, ReactNode, useState } from 'react';
+import React, { createRef, ReactNode, useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
 import SynchronizationPopup from '../SynchronizationPopup';
@@ -11,36 +11,44 @@ interface MenuProp {
 const Menu = ({}: MenuProp) => {
 	const dispatch = useAppDispatch();
 	const players = useAppSelector((player) => player.game.players);
-	const id = useAppSelector((player) => player.game.id);
+	const master = useAppSelector((player) => player.game.master);
 	const [visiblePopup, setVisiblePopup] = useState(false);
+	const synchronizationPopup = useAppSelector((state) => state.interface.synchronizationPopup);
 
 	const { name } = players.find((player) => player.turn) || {};
+
 	return (
-		<div className='fixed left-0 top-0 z-20 flex flex-col h-screen w-[300px] bg-black/50'>
+		<div className='fixed left-0 top-0  flex flex-col h-screen w-[300px] bg-black/50 '>
 			<button
-				className='bg-slate-400  py-2  hover:bg-slate-200 cursor-pointer opacity-50 font-russo '
+				className='bg-[#4a545f]  py-2  hover:bg-slate-200 cursor-pointer  font-russo '
 				onClick={() => {
 					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: true }));
 				}}>
 				История ходов
 			</button>
 
-			{players.map((player) => {
-				return <MenuItem player={player} key={player.id} />;
-			})}
+			<div className='h-[calc(100%_-_120px)] overflow-y-auto'>
+				{players.map((player) => {
+					if (!master) {
+						if (player.ignored || player.disconnected) return null;
+					}
+
+					return <MenuItem player={player} key={player.id} />;
+				})}
+			</div>
 			<div className=' absolute bottom-0 w-full'>
 				<div className='text-white  text-[12px]'> Ход игрока: {name}</div>
-				<div className='text-white mb-1 text-[12px]'> Количество игроков: {players.length}</div>
+				{/* <div className='text-white mb-1 text-[12px]'> Количество игроков: {players.length}</div> */}
 				<button
-					className='bg-slate-400  py-2 w-full font-russo hover:bg-slate-200 cursor-pointer opacity-50 font-'
+					className='bg-[#4a545f] py-2 w-full font-russo hover:bg-slate-200 cursor-pointer font-'
 					onClick={() => {
-						setVisiblePopup(true);
+						dispatch(interfaceSlice.actions.setSynchronizationPopup(true));
 					}}>
 					Синхронизироваться с полем
 				</button>
 			</div>
 
-			{visiblePopup && <SynchronizationPopup onClose={() => setVisiblePopup(false)} />}
+			{synchronizationPopup && <SynchronizationPopup />}
 		</div>
 	);
 };

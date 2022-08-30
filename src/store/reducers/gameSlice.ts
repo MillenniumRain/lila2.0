@@ -1,7 +1,6 @@
-import { figures } from './../../data/figures';
-import { websocketAPI } from './../../lib/websocketAPI';
 import { getMap } from '../../lib/index';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import MD5 from 'crypto-js/md5';
 
 export interface IDescription {
 	id: number;
@@ -18,8 +17,7 @@ export interface ICard {
 	hexagram_color: string;
 }
 
-export interface IPLayer {
-	id?: string;
+export interface IPlayerParams {
 	name: string;
 	color: string;
 	position: number;
@@ -27,7 +25,35 @@ export interface IPLayer {
 	turn: boolean;
 	dice: number | null;
 	disconnected: boolean;
+	history: IHistory;
+	winner: boolean;
+	disappointments: number;
+	ignored: boolean;
+	purpose: string;
 }
+export interface IPlayer extends IPlayerParams {
+	id: string;
+}
+export const getInitialPLayer = (newParams: {}) => {
+	return {
+		name: '',
+		color: '#fff',
+		position: 0,
+		figure: 0,
+		turn: false,
+		dice: null,
+		disconnected: false,
+		winner: false,
+		ignored: false,
+		disappointments: 0,
+		purpose: '',
+		history: {
+			lastId: 0,
+			list: [],
+		},
+		...newParams,
+	};
+};
 interface IHistory {
 	lastId: number;
 	list: IHistoryList[];
@@ -39,36 +65,54 @@ export interface IHistoryList {
 }
 interface GameState {
 	name: string;
+	password: string;
 	dice: number;
 	id: string;
 	gameMap: ICard[];
-	players: IPLayer[];
-	history: IHistory;
+	players: IPlayer[];
 	figure: number;
 	sessionId: string;
 	socket: WebSocket | null;
+	master: boolean;
+	masterMoveId: string;
 }
 interface IPlayerSocket {
 	id: string;
-	players: IPLayer[];
+	players: IPlayer[];
 }
 interface MovePayload {
 	cardId: number;
 	playerId?: string;
 }
+interface masterSetNamePayload {
+	playerId: string;
+	name: string;
+}
+interface masterSetIgnorePayload {
+	playerId: string;
+	ignored: boolean;
+}
+interface masterSetDisappointmentsPayload {
+	playerId: string;
+	disappointments: number;
+}
+interface loginPayload {
+	name: string;
+	password?: string;
+	figure: number;
+}
 const initialState: GameState = {
 	id: '',
 	name: '',
+	password: '',
 	figure: 0,
 	dice: 0,
 	gameMap: getMap(),
 	socket: null,
 	sessionId: '',
-	history: {
-		lastId: 6,
-		list: [],
-	},
+	master: false,
 	players: [],
+	masterMoveId: '',
 };
 
 export const gameSlice = createSlice({
@@ -84,6 +128,8 @@ export const gameSlice = createSlice({
 		updatePlayers: (state, action: PayloadAction<IPlayerSocket>) => {
 			state.players = action.payload.players;
 			state.id = action.payload.id;
+			const index = state.players.findIndex((player) => player.id === action.payload.id);
+			index && localStorage.setItem(state.sessionId, JSON.stringify(action.payload.players[index]));
 		},
 		disconnected: (state) => {
 			state.socket?.send(
@@ -96,44 +142,55 @@ export const gameSlice = createSlice({
 		},
 
 		//******************************/
-
+		setMasterMovePlayer: (state, action: PayloadAction<string>) => {
+			state.masterMoveId = action.payload;
+		},
 		move: (state, action: PayloadAction<MovePayload>) => {
 			const cardId = action.payload.cardId;
 			const id = action.payload.playerId || state.id;
-			const index = state.players.findIndex((player) => player.id === id) || 0;
+			const index = state.players.findIndex((player) => player.id === id);
 
 			if (state.players[index].position === cardId) return;
-			if (!state.players[index].turn) return;
+			if (!state.players[index].turn && !state.master) return;
 
 			state.socket?.send(
 				JSON.stringify({
-					method: 'setposition',
+					method: 'setposition_history',
 					sessionId: state.sessionId,
-					playerId: id,
+					playerId: action.payload.playerId || id,
 					position: cardId,
+					history: { cardId },
 				})
 			);
+		},
 
-			if (!action.payload.playerId) {
-				const lastId = state.history.lastId;
-				state.history.list.push({ id: lastId + 1, cardId: cardId });
-				state.history.lastId = lastId + 1;
+		login: (state, action: PayloadAction<loginPayload>) => {
+			state.name = action.payload.name;
+			state.figure = action.payload.figure;
+			state.password = action.payload.password ? MD5(action.payload.password || '').toString() : '';
+		},
+		authMaster: (state, action: PayloadAction<boolean>) => {
+			if (action.payload) {
+				state.master = true;
 			}
 		},
 		setThought: (state, action: PayloadAction<IHistoryList>) => {
-			const id = action.payload.id ? action.payload.id : state.history.lastId;
-			const index = state.history.list.findIndex((thought) => thought.id === id);
-
-			if (index > -1) {
-				state.history.list[index].thoughtId = action.payload.thoughtId;
-			}
+			state.socket?.send(
+				JSON.stringify({
+					method: 'setthought',
+					sessionId: state.sessionId,
+					playerId: state.id,
+					history: {
+						id: action.payload.id,
+						thoughtId: action.payload.thoughtId,
+					},
+				})
+			);
 		},
 		setDice: (state, action: PayloadAction<number>) => {
-			const index = state.players.findIndex((player) => player.id === state.id);
 			state.socket?.send(
 				JSON.stringify({
 					method: 'setdice',
-					sessionId: state.sessionId,
 					playerId: state.id,
 					dice: action.payload,
 				})
@@ -154,7 +211,6 @@ export const gameSlice = createSlice({
 			state.socket?.send(
 				JSON.stringify({
 					method: 'completemove',
-					sessionId: state.sessionId,
 					playerId: state.id,
 				})
 			);
@@ -163,16 +219,60 @@ export const gameSlice = createSlice({
 			state.socket?.send(
 				JSON.stringify({
 					method: 'setturn',
-					sessionId: state.sessionId,
 					playerId: action.payload,
 				})
 			);
 		},
+
 		setFigure: (state, action: PayloadAction<number>) => {
 			state.figure = action.payload;
 		},
+		setPurpose: (state, action: PayloadAction<string>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'setpurpose',
+					playerId: state.id,
+					purpose: action.payload,
+				})
+			);
+		},
 		setPLayerName: (state, action: PayloadAction<string>) => {
 			state.name = action.payload;
+		},
+		masterSetName: (state, action: PayloadAction<masterSetNamePayload>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'mastersetname',
+					playerId: action.payload.playerId,
+					name: action.payload.name,
+				})
+			);
+		},
+		masterSetIgnore: (state, action: PayloadAction<masterSetIgnorePayload>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'mastersetignore',
+					playerId: action.payload.playerId,
+					ignored: action.payload.ignored,
+				})
+			);
+		},
+		masterSetDisappointments: (state, action: PayloadAction<masterSetDisappointmentsPayload>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'mastersetdisappointments',
+					playerId: action.payload.playerId,
+					disappointments: action.payload.disappointments,
+				})
+			);
+		},
+		masterSetNewGame: (state, action: PayloadAction<string>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'mastersetnewgame',
+					playerId: action.payload,
+				})
+			);
 		},
 	},
 });

@@ -20,7 +20,7 @@ const Arrows = ({ id, className }: ArrowsProp) => {
 					onClick={() => {
 						let tid = id - 1;
 						if (tid < 0) tid = 0;
-						dispatch(interfaceSlice.actions.setActiveId(tid));
+						dispatch(interfaceSlice.actions.setActiveCardId(tid));
 					}}>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -41,7 +41,7 @@ const Arrows = ({ id, className }: ArrowsProp) => {
 					onClick={() => {
 						let tid = id + 1;
 						if (tid > 64) tid = 64;
-						dispatch(interfaceSlice.actions.setActiveId(tid));
+						dispatch(interfaceSlice.actions.setActiveCardId(tid));
 					}}>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'

@@ -3,13 +3,13 @@ import { figures } from '../data/figures';
 
 interface FigureProp {
 	children?: ReactNode;
-	className: string;
+	className?: string;
 	id: number;
 	animation?: boolean;
 }
 
 const Figure = ({ id, className, animation }: FigureProp) => {
-	return <div className={`${className}  ${animation && 'animate-spin-slow'}`}>{figures[id]}</div>;
+	return <div className={`${className || ''}  ${animation ? 'animate-spin-slow' : ''}`}>{figures[id]}</div>;
 };
 
 export default Figure;

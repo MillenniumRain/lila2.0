@@ -1,32 +1,45 @@
 import React, { ReactNode } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { gameSlice, ICard } from '../../store/reducers/GameSlice';
-import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
-import Hexagram from '../Hexagram/Hexagram';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { gameSlice, ICard } from '../../../store/reducers/GameSlice';
+import { interfaceSlice } from '../../../store/reducers/InterfaceSlice';
+import Hexagram from '../../Hexagram/Hexagram';
 import Position from './Position';
 
 interface CardProp {
 	card: ICard;
 	children?: ReactNode;
 	className?: string;
+	zero?: boolean;
 	clean?: boolean;
 }
 
-const Card = ({ card, className, clean }: CardProp) => {
+const Card = ({ card, className, clean, zero }: CardProp) => {
 	const { id, hexagram, hexagram_color, number_color, color, name, bg } = card;
 	const players = useAppSelector((state) => state.game.players);
+	const masterMoveId = useAppSelector((state) => state.game.masterMoveId);
+	const synchronizationPopup = useAppSelector((state) => state.interface.synchronizationPopup);
+
 	const playerMoving = players.find((player) => player.turn);
 
 	const dispatch = useAppDispatch();
 	return (
 		<div className={`relative`}>
 			<button
-				className={`overflow-hidden relative w-[90px] h-[90px] border-b-2   border border-r-2 p-[3px] border-[#15323d] ]  flex justify-between    transition-all 
-			${playerMoving?.position == id ? `ping z-20` : `hover:-translate-y-1`}
-			${clean ? `cursor-default` : 'hover:z-20 hover:opacity-90 hover:relative  cursor-pointer'}  ${className}`}
-				style={{ background: bg }}
+				className={`overflow-hidden relative w-cell h-cell    border border-r-2 p-[3px] border-[#15323d] ]  flex justify-between    transition-all 
+			${clean || playerMoving?.position == id ? `ping z-20` : `hover:-translate-y-1`}
+			${clean ? `cursor-default` : 'hover:z-20 hover:opacity-90 hover:relative  cursor-pointer'}  ${
+					zero ? 'border-0' : 'border-b-2'
+				}`}
+				style={{ background: zero ? 'rgb(0,0,0,0)' : bg }}
 				onClick={() => {
-					dispatch(gameSlice.actions.move({ cardId: id }));
+					const payload = { cardId: id, playerId: '' };
+
+					if (masterMoveId.length > 0) {
+						payload.playerId = masterMoveId;
+						dispatch(gameSlice.actions.setMasterMovePlayer(''));
+					}
+
+					dispatch(gameSlice.actions.move(payload));
 				}}
 				onContextMenu={(e) => {
 					e.preventDefault();
@@ -61,6 +74,7 @@ const Card = ({ card, className, clean }: CardProp) => {
 			</button>
 			<div
 				className={` ${
+					!clean &&
 					playerMoving?.position == id &&
 					` animate-pulse-slow absolute top-0 left-0 w-full h-full  shadow-card  z-10`
 				} `}></div>

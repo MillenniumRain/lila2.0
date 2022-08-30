@@ -4,11 +4,12 @@ import { createPortal } from 'react-dom';
 interface PopupProp {
 	children: ReactNode;
 	onClose: (e: React.MouseEvent) => void;
+	zIndex?: number;
 }
-const Popup = ({ children, onClose }: PopupProp) => {
+const Popup = ({ children, onClose, zIndex = 30 }: PopupProp) => {
 	const popupDiv = document.getElementById('popup') as HTMLDivElement;
 	return createPortal(
-		<div className={'fixed  w-screen h-screen top-0 left-0 flex justify-center items-center z-50'}>
+		<div className={`fixed  w-screen h-screen top-0 left-0 flex justify-center items-center`} style={{ zIndex }}>
 			<div
 				className='absolute w-full h-full bg-black/50 cursor-pointer'
 				onClick={onClose}

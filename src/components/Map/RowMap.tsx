@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { useAppDispatch } from '../hooks/hooks';
-import { ICard } from '../store/reducers/GameSlice';
+import { useAppDispatch } from '../../hooks/hooks';
+import { ICard } from '../../store/reducers/GameSlice';
 import Card from './Card/Card';
 
 interface RowMapProp {

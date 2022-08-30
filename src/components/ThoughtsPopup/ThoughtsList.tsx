@@ -27,7 +27,7 @@ const ThoughtsList = ({ onContextMenu }: ThoughtsListProp) => {
 					if (pickedIdThought) setThoughtObj.id = pickedIdThought;
 					return (
 						<div
-							className='mt-[-2px] border-2 p-2 cursor-pointer hover:bg-slate-200 last:mb-0 '
+							className='mt-[-2px]  p-2 cursor-pointer hover:bg-slate-200 last:mb-0 '
 							key={thought.id}
 							onClick={(e) => {
 								dispatch(interfaceSlice.actions.setThoughtsPopup({ visible: false }));

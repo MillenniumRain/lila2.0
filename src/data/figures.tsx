@@ -5,9 +5,13 @@ import anahata from './../assets/img/icons8-anahata-100.png';
 import manipura from './../assets/img/icons8-manipura-100.png';
 import muladhara from './../assets/img/icons8-muladhara-100.png';
 import svadhishthana from './../assets/img/icons8-svadhishthana-100.png';
+import godchakra from './../assets/img/godchakra.png';
 
 const chakra = 'block rounded-full p-[2px] ';
 export const figures = [
+	<span className={chakra}>
+		<img src={godchakra} alt='' />
+	</span>,
 	<span className={chakra}>
 		<img src={sahasrara} alt='' />
 	</span>,

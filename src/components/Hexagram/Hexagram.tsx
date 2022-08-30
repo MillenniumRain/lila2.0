@@ -8,6 +8,8 @@ interface HexagramProp {
 }
 
 const Hexagram = ({ hexagram, hexagram_color }: HexagramProp) => {
+	if (hexagram.length < 6) return null;
+
 	return (
 		<>
 			<HexagramLine center={hexagram[0]} color={hexagram_color} />

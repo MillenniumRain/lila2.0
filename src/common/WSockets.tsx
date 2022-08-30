@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { gameSlice } from '../store/reducers/GameSlice';
+import { gameSlice, getInitialPLayer } from '../store/reducers/GameSlice';
+import { interfaceSlice } from '../store/reducers/InterfaceSlice';
 
 interface WSocketsProp {
 	children?: ReactNode;
@@ -10,20 +11,14 @@ interface WSocketsProp {
 const WSockets = ({ children }: WSocketsProp) => {
 	const dispatch = useAppDispatch();
 	const name = useAppSelector((state) => state.game.name);
+	const password = useAppSelector((state) => state.game.password);
 	const figure = useAppSelector((state) => state.game.figure);
 
 	const params = useParams();
 	const sessionId = params.id || '';
 
-	const initialPLayer = {
-		name,
-		color: '#fff',
-		position: 0,
-		figure,
-		turn: false,
-		dice: null,
-		disconnected: false,
-	};
+	const initialPLayer = getInitialPLayer({ name, figure });
+
 	useEffect(() => {
 		if (!name) return;
 
@@ -33,21 +28,23 @@ const WSockets = ({ children }: WSocketsProp) => {
 
 		socket.onopen = () => {
 			const lastGamePlayer = JSON.parse(localStorage.getItem(sessionId) || '{}');
+
 			socket.send(
 				JSON.stringify({
 					sessionId,
 					method: 'connect',
 					lastGamePlayer,
 					initialPLayer,
+					password,
 				})
 			);
 		};
+		socket.onclose = () => {};
 		socket.onmessage = (event) => {
 			const data = JSON.parse(event.data);
 			switch (data.method) {
 				case 'connected': {
 					console.log(data);
-
 					dispatch(gameSlice.actions.setPlayers({ id: data.playerId, players: data.players }));
 					break;
 				}
@@ -56,9 +53,18 @@ const WSockets = ({ children }: WSocketsProp) => {
 					dispatch(gameSlice.actions.updatePlayers({ id: data.playerId, players: data.players }));
 					break;
 				}
+				case 'authasmaster': {
+					if (data.correct) {
+						dispatch(gameSlice.actions.authMaster(true));
+						dispatch(interfaceSlice.actions.setLoginPopup(false));
+					} else {
+						dispatch(interfaceSlice.actions.setWrongPassword(data.message));
+					}
+					break;
+				}
 			}
 		};
-	}, [name]);
+	}, [name, password]);
 	return <>{children}</>;
 };
 
