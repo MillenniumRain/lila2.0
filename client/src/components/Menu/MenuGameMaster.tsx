@@ -18,15 +18,24 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 	return (
 		<div ref={ref} className='flex flex-col bg-black/70  h-[0] transition-all  overflow-hidden text-sm select-none'>
 			<div
+				className='px-2 py-1 text-white hover:opacity-50 cursor-pointer'
+				onClick={() => {
+					dispatch(interfaceSlice.actions.setActivePlayerId(player.id));
+					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: true }));
+					current && current.classList.remove('active');
+				}}>
+				Посмотреть историю
+			</div>
+			<div
 				className={`px-2 py-1  hover:opacity-50 cursor-pointer ${
-					masterMoveId == player.id ? 'text-green-500' : 'text-white'
+					masterMoveId === player.id ? 'text-green-500' : 'text-white'
 				}`}
 				onClick={() => {
 					let id = player.id;
-					if (masterMoveId == player.id) {
+					if (masterMoveId === player.id) {
 						id = '';
 					}
-					if (masterMoveId && masterMoveId != player.id) {
+					if (masterMoveId && masterMoveId !== player.id) {
 						id = player.id;
 					}
 					dispatch(gameSlice.actions.setMasterMovePlayer(id));
@@ -43,11 +52,11 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 			</div>
 			<div className='px-2 py-1 text-white cursor-pointer flex justify-between items-baseline'>
 				<div>Разочарования</div>
-				<div>
-					<span
+				<div className='flex'>
+					<div
 						className='text-sm mr-1 hover:opacity-80'
 						onClick={() => {
-							if (player.disappointments == 0) return;
+							if (player.disappointments === 0) return;
 							dispatch(
 								gameSlice.actions.masterSetDisappointments({
 									disappointments: player.disappointments - 1,
@@ -56,9 +65,9 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 							);
 						}}>
 						➖
-					</span>
-					<span className='text-[18px] bold mr-1 text-center align-bottom'>{player.disappointments}</span>
-					<span
+					</div>
+					<div className='text-[18px] bold mr-1 text-center align-bottom'>{player.disappointments}</div>
+					<div
 						className='text-sm hover:opacity-50'
 						onClick={() => {
 							dispatch(
@@ -69,7 +78,7 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 							);
 						}}>
 						➕
-					</span>
+					</div>
 				</div>
 			</div>
 			{!visibleInput && (
@@ -112,15 +121,7 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 					</button>
 				</form>
 			)}
-			<div
-				className='px-2 py-1 text-white hover:opacity-50 cursor-pointer'
-				onClick={() => {
-					dispatch(interfaceSlice.actions.setActivePlayerId(player.id));
-					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: true }));
-					current && current.classList.remove('active');
-				}}>
-				Посмотреть историю
-			</div>
+
 			<div
 				className='px-2 py-1 text-white hover:opacity-50 cursor-pointer'
 				onClick={() => {
@@ -136,9 +137,9 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 					current && current.classList.remove('active');
 				}}>
 				{player.ignored ? (
-					<span className='text-green-500/70'>Отобразить игрока</span>
+					<div className='text-green-500/70'>Отобразить игрока</div>
 				) : (
-					<span className='text-red-500/70'>Скрыть игрока</span>
+					<div className='text-red-500/70'>Скрыть игрока</div>
 				)}
 			</div>
 

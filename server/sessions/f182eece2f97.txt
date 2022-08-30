@@ -1,0 +1,89 @@
+{
+   "players": [
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 43,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "purpose": "",
+         "history": {
+            "lastId": 17,
+            "list": [
+               null,
+               {
+                  "id": 2,
+                  "cardId": 29
+               },
+               {
+                  "id": 3,
+                  "cardId": 13
+               },
+               {
+                  "id": 4,
+                  "cardId": 30
+               },
+               {
+                  "id": 5,
+                  "cardId": 35
+               },
+               {
+                  "id": 6,
+                  "cardId": 43
+               },
+               {
+                  "id": 7,
+                  "cardId": 52
+               },
+               {
+                  "id": 8,
+                  "cardId": 46
+               },
+               {
+                  "id": 9,
+                  "cardId": 28
+               },
+               {
+                  "id": 10,
+                  "cardId": 19
+               },
+               {
+                  "id": 11,
+                  "cardId": 11
+               },
+               {
+                  "id": 12,
+                  "cardId": 13
+               },
+               {
+                  "id": 13,
+                  "cardId": 22
+               },
+               {
+                  "id": 14,
+                  "cardId": 30
+               },
+               {
+                  "id": 15,
+                  "cardId": 28
+               },
+               {
+                  "id": 16,
+                  "cardId": 34
+               },
+               {
+                  "id": 17,
+                  "cardId": 43
+               }
+            ]
+         },
+         "id": "Ведущий182eece4d63",
+         "master": true
+      }
+   ]
+}

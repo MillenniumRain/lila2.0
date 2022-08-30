@@ -13,9 +13,6 @@ app.ws('/', (ws, req) => {
 		let { player, index } = findPlayer(ws);
 		if (player) {
 			player.disconnected = true;
-			if (aWss.clients.size > 1) {
-				player.turn = false;
-			}
 
 			broadcastUpdate(ws);
 		}
@@ -165,6 +162,12 @@ app.ws('/', (ws, req) => {
 				const { player, index } = findPlayer(ws, msg.playerId);
 				player.disappointments = msg.disappointments;
 
+				break;
+			}
+			case 'masterdeletethought': {
+				const { player, index } = findPlayer(ws, msg.playerId);
+				const indexTh = player?.history?.list?.findIndex((thought) => thought.id == msg.thoughtId);
+				player.history.list.splice(indexTh, 1);
 				break;
 			}
 			case 'setpurpose': {

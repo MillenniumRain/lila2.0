@@ -9,28 +9,28 @@ import godchakra from './../assets/img/godchakra.png';
 
 const chakra = 'block rounded-full p-[2px] ';
 export const figures = [
-	<span className={chakra}>
+	<div className={chakra}>
 		<img src={godchakra} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={sahasrara} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={adjna} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={vishuddha} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={anahata} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={manipura} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={svadhishthana} alt='' />
-	</span>,
-	<span className={chakra}>
+	</div>,
+	<div className={chakra}>
 		<img src={muladhara} alt='' />
-	</span>,
+	</div>,
 ];

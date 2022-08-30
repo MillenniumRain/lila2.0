@@ -9,9 +9,10 @@ interface HistoryPopupProp {
 }
 const HistoryPopup = ({}: HistoryPopupProp) => {
 	const id = useAppSelector((state) => state.game.id);
+	const master = useAppSelector((state) => state.game.master);
 	const players = useAppSelector((state) => state.game.players);
 	const gameMap = useAppSelector((state) => state.game.gameMap);
-	const activePlayerId = useAppSelector((state) => state.interface.activePlayerId);
+	const activePlayerId = useAppSelector((state) => state.interface.activePlayerId) || id;
 	const index = players.findIndex((player) => player.id == (activePlayerId || id));
 	const history = players[index].history || { list: [], maxId: 1 };
 
@@ -37,23 +38,47 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 
 			if (thought) {
 				input.push(
-					<div
-						className='flex flex-col cursor-pointer group hover:opacity-80'
-						style={{ background: gameMap[thought.cardId || 0].bg + 'cf' }}
-						onClick={() => {
-							dispatch(
-								interfaceSlice.actions.setThoughtsPopup({
-									visible: true,
-									activeCard: thought.cardId,
-									pickedIdThought: thought.id,
-								})
-							);
-						}}
-						key={thought.id}>
-						<div className='border border-slate-200 flex py-1 px-4 min-w-[52px] justify-center items-center '>
+					<div className='relative flex flex-col cursor-pointer group ' key={thought.id}>
+						{master ? (
+							<div
+								className='absolute  -top-[32px] text-lg z-10 bg-white text-red-600 border-2 border-red-600  hidden  px-4 w-[52px] justify-center group-hover:flex  hover:flex hover:bg-red-600  hover:text-white hover:border-white items-center'
+								onClick={() => {
+									dispatch(
+										gameSlice.actions.masterDeleteThought({
+											playerId: activePlayerId || id,
+											thoughtId: thought.id,
+										})
+									);
+								}}>
+								🗙
+							</div>
+						) : null}
+						<div
+							className='border border-slate-200 flex py-1 px-4 min-w-[52px] justify-center group-hover:opacity-80 items-center '
+							style={{ background: gameMap[thought.cardId || 0].bg + 'cf' }}
+							onClick={() => {
+								dispatch(
+									interfaceSlice.actions.setThoughtsPopup({
+										visible: true,
+										activeCard: thought.cardId,
+										pickedIdThought: thought.id,
+									})
+								);
+							}}>
 							{thought.cardId}
 						</div>
-						<div className='border border-slate-200 flex py-1 px-4   min-w-[52px] justify-center items-center '>
+						<div
+							className='border border-slate-200 flex py-1 px-4   min-w-[52px] justify-center group-hover:opacity-80 items-center '
+							style={{ background: gameMap[thought.cardId || 0].bg + 'cf' }}
+							onClick={() => {
+								dispatch(
+									interfaceSlice.actions.setThoughtsPopup({
+										visible: true,
+										activeCard: thought.cardId,
+										pickedIdThought: thought.id,
+									})
+								);
+							}}>
 							{thought.thoughtId}&nbsp;
 						</div>
 					</div>
@@ -74,6 +99,9 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 		<div className=''>
 			<Popup
 				onClose={() => {
+					if (visibleInput) {
+						dispatch(gameSlice.actions.setPurpose(purpose));
+					}
 					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: false }));
 				}}>
 				<div className='bg-white  w-[800px] h-2/3 z-10 py-10 px-20 overflow-x-auto'>
@@ -85,9 +113,9 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 							onClick={() => {
 								setVisibleInput(true);
 							}}>
-							<div className=''>
-								<span className='font-bold mr-2'>Цель:</span>
-								{!visibleInput && purpose}
+							<div className='flex'>
+								<div className='font-bold mr-2'>Цель:</div>
+								<div>{visibleInput ? '' : `${purpose}`}</div>
 							</div>
 							{visibleInput ? (
 								<form
@@ -115,9 +143,9 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 									</button>
 								</form>
 							) : (
-								<span className=' opacity-0 text-slate-500 font-normal text-sm group-hover:opacity-100'>
+								<div className=' opacity-0 text-slate-500 font-normal text-sm group-hover:opacity-100'>
 									изменить
-								</span>
+								</div>
 							)}
 						</div>
 

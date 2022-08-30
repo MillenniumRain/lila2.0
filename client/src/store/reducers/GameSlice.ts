@@ -96,6 +96,12 @@ interface masterSetDisappointmentsPayload {
 	playerId: string;
 	disappointments: number;
 }
+
+interface masterDeleteThoughtPayload {
+	playerId: string;
+	thoughtId: number | undefined;
+}
+
 interface loginPayload {
 	name: string;
 	password?: string;
@@ -178,12 +184,21 @@ export const gameSlice = createSlice({
 			state.socket?.send(
 				JSON.stringify({
 					method: 'setthought',
-					sessionId: state.sessionId,
 					playerId: state.id,
 					history: {
 						id: action.payload.id,
 						thoughtId: action.payload.thoughtId,
 					},
+				})
+			);
+		},
+		masterDeleteThought: (state, action: PayloadAction<masterDeleteThoughtPayload>) => {
+			state.socket?.send(
+				JSON.stringify({
+					method: 'masterdeletethought',
+					sessionId: state.sessionId,
+					playerId: action.payload.playerId,
+					thoughtId: action.payload.thoughtId,
 				})
 			);
 		},
