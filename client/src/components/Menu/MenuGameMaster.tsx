@@ -5,11 +5,12 @@ import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
 
 interface MenuGameMasterProp {
 	children?: ReactNode;
+	hideMenu?: () => void;
 	player: IPlayer;
 	current: HTMLDivElement | null;
 }
 
-const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player, current }, ref) => {
+const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player, current, hideMenu }, ref) => {
 	const dispatch = useAppDispatch();
 	const [inputName, setInputName] = useState(player.name || '');
 	const masterMoveId = useAppSelector((state) => state.game.masterMoveId);
@@ -23,6 +24,7 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 					dispatch(interfaceSlice.actions.setActivePlayerId(player.id));
 					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: true }));
 					current && current.classList.remove('active');
+					hideMenu && hideMenu();
 				}}>
 				Посмотреть историю
 			</div>
@@ -38,6 +40,7 @@ const MenuGameMaster = forwardRef<HTMLDivElement, MenuGameMasterProp>(({ player,
 					if (masterMoveId && masterMoveId !== player.id) {
 						id = player.id;
 					}
+
 					dispatch(gameSlice.actions.setMasterMovePlayer(id));
 				}}>
 				Передвинуть

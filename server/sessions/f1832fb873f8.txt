@@ -1,0 +1,61 @@
+{
+   "players": [
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": true,
+         "dice": null,
+         "disconnected": false,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий1832fb8adb0"
+      },
+      {
+         "name": "Никита",
+         "color": "#fff",
+         "position": 0,
+         "figure": 0,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Никита1832fe2afdc"
+      },
+      {
+         "name": "клерк",
+         "color": "#fff",
+         "position": 0,
+         "figure": 0,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "клерк1832fe2efdc"
+      }
+   ]
+}

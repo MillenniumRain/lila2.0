@@ -10,6 +10,7 @@ interface IInterface {
 	activePlayerId: string;
 	playerName: string;
 	rollingDice: boolean;
+	instructionsPopup: boolean;
 	wrongPasswordMessage: string;
 }
 interface ThoughtsPayload {
@@ -24,6 +25,7 @@ const initialState: IInterface = {
 	activePlayerId: '',
 	historyPopup: false,
 	thoughtsPopup: false,
+	instructionsPopup: false,
 	synchronizationPopup: false,
 	loginPopup: true,
 	activeCard: null,
@@ -57,6 +59,9 @@ export const interfaceSlice = createSlice({
 		},
 		setLoginPopup: (state, action: PayloadAction<boolean>) => {
 			state.loginPopup = action.payload;
+		},
+		setInstructionsPopup: (state, action: PayloadAction<boolean>) => {
+			state.instructionsPopup = action.payload;
 		},
 		setSynchronizationPopup: (state, action: PayloadAction<boolean>) => {
 			state.synchronizationPopup = action.payload;

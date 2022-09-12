@@ -28,10 +28,10 @@ const Background = ({}: BackgroundProp) => {
 		let starsElements: any[] = [];
 
 		let frameAnim: any = null;
-		window.onresize = function () {
-			setupStars();
-			updateStars();
-		};
+		// window.onresize = function () {
+		// 	setupStars();
+		// 	updateStars();
+		// };
 		// star constructor
 		class Star {
 			x: number;
@@ -90,8 +90,8 @@ const Background = ({}: BackgroundProp) => {
 				starsElements[i] = new Star();
 			}
 		}
-		setupStars();
-		updateStars();
+		// setupStars();
+		// updateStars();
 		// return () => {
 		// 	window.onresize = null;
 		// };

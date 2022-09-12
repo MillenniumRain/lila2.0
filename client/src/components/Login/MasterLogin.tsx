@@ -73,7 +73,7 @@ const MasterLogin = ({}: MasterLoginProp) => {
 							}}
 						/>
 					</div>
-					<div className='mb-4'>
+					<div className='mb-4 w-full'>
 						<div className='text-lg font-bold mb-1'>Выберите фишку для игры</div>
 						<div className='w-full flex justify-around'>
 							{figures.map((fig, index) => {
@@ -97,7 +97,7 @@ const MasterLogin = ({}: MasterLoginProp) => {
 
 			<button
 				type='submit'
-				className='p-2 border-2 border-orange-300 mb-4 text-orange-300 z-10  rounded-lg max-w-[200px] hover:bg-orange-300 hover:text-white bold'>
+				className='p-2 border-2 border-sky-700 mb-4 text-sky-700 z-10  rounded-lg max-w-[200px] hover:bg-sky-700 hover:text-white bold'>
 				Войти в игру
 			</button>
 		</form>

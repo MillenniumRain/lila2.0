@@ -16,12 +16,12 @@ const ThoughtsList = ({ onContextMenu }: ThoughtsListProp) => {
 	const pickedIdThought = useAppSelector((state) => state.interface.pickedIdThought);
 
 	return (
-		<div className='px-[50px] h-full ' onContextMenu={onContextMenu}>
+		<div className='px-[50px] to450:px-4 h-full ' onContextMenu={onContextMenu}>
 			{/* <Arrows id={id} /> */}
-			<div className=' relative h-full overflow-x-auto py-4'>
-				<div className='mb-5 text-lg font-bold px-1 '>
+			<div className='grid relative h-full overflow-x-auto py-4 '>
+				{/* <div className='mb-5 text-lg font-bold px-1 '>
 					{id}. {name}
-				</div>
+				</div> */}
 				{description?.map((thought) => {
 					const setThoughtObj: IHistoryList = { cardId: id, thoughtId: thought.id };
 					if (pickedIdThought) setThoughtObj.id = pickedIdThought;

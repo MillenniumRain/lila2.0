@@ -9,10 +9,10 @@ function App() {
 				<Route
 					path='/:id'
 					element={
-						<>
+						<div>
 							<WSockets />
 							<Lila />
-						</>
+						</div>
 					}
 				/>
 				<Route path='/' element={<Navigate to={`/f${(+new Date()).toString(16)}`} />} />

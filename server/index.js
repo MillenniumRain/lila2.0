@@ -13,7 +13,24 @@ app.ws('/', (ws, req) => {
 		let { player, index } = findPlayer(ws);
 		if (player) {
 			player.disconnected = true;
+			if (player.turn /*&& aWss.clients.size > 1*/) {
+				let size = 0;
+				aWss.clients.forEach((client) => {
+					if (client.sessionId == ws.sessionId) {
+						size++;
+					}
+				});
+				if (size > 1) {
+					sessions[ws.sessionId].players.forEach((player) => {
+						player.turn = false;
+					});
 
+					index = checkNextPLayer(ws, index);
+					if (index >= 0) {
+						sessions[ws.sessionId].players[index].turn = true;
+					}
+				}
+			}
 			broadcastUpdate(ws);
 		}
 	});
@@ -74,7 +91,13 @@ app.ws('/', (ws, req) => {
 					ws.id = msg.lastGamePlayer.id;
 				}
 				const { player } = findPlayer(ws);
+				if (!checkTurn(ws)) {
+					player.turn = true;
+				}
 				if (player.master) {
+					if (player.ignored) {
+						player.turn = false;
+					}
 					ws.send(
 						JSON.stringify({
 							message: 'Авторизован',
@@ -89,7 +112,6 @@ app.ws('/', (ws, req) => {
 			case 'setposition_history': {
 				const { player } = findPlayer(ws, msg.playerId);
 				player.position = msg.position;
-				// player.disconnected = false;
 				if (msg.playerId == ws.id) {
 					const lastId = player.history.lastId;
 					player.history.list.push({
@@ -126,7 +148,9 @@ app.ws('/', (ws, req) => {
 				});
 
 				index = checkNextPLayer(ws, index);
-				sessions[ws.sessionId].players[index].turn = true;
+				if (index >= 0) {
+					sessions[ws.sessionId].players[index].turn = true;
+				}
 				break;
 			}
 			case 'setturn': {
@@ -149,6 +173,7 @@ app.ws('/', (ws, req) => {
 				player.position = 0;
 				player.history = { lastId: 0, list: [] };
 				player.purpose = '';
+				player.dice = null;
 				break;
 			}
 			case 'mastersetignore': {
@@ -182,6 +207,16 @@ app.ws('/', (ws, req) => {
 });
 
 app.listen(PORT, () => console.log(`server started on PORT ${PORT}`));
+const checkTurn = (ws) => {
+	let flag = false;
+	aWss.clients.forEach((client) => {
+		if (client.sessionId == ws.sessionId) {
+			const { player } = findPlayer(client);
+			if (player.turn) flag = true;
+		}
+	});
+	return flag;
+};
 const findPlayer = (ws, id = '') => {
 	const playerId = id || ws.id;
 	const index = sessions[ws.sessionId]?.players?.findIndex((player) => player.id == playerId);
@@ -199,7 +234,7 @@ const checkNextPLayer = (ws, index = 0, loops = 0) => {
 	) {
 		return index;
 	}
-	if (loops >= 3) return null;
+	if (loops >= 2) return null;
 
 	return checkNextPLayer(ws, index, loops + 1);
 };

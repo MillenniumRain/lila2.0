@@ -1,0 +1,23 @@
+{
+   "players": [
+      {
+         "name": "Никита",
+         "color": "#fff",
+         "position": 0,
+         "figure": 0,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Никита1832b3f7fc7"
+      }
+   ]
+}

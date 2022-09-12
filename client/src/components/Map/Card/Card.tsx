@@ -13,7 +13,7 @@ interface CardProp {
 	clean?: boolean;
 }
 
-const Card = ({ card, className, clean, zero }: CardProp) => {
+const Card = ({ card, className, clean = false, zero }: CardProp) => {
 	const { id, hexagram, hexagram_color, number_color, color, name, bg } = card;
 	const players = useAppSelector((state) => state.game.players);
 	const masterMoveId = useAppSelector((state) => state.game.masterMoveId);
@@ -23,26 +23,29 @@ const Card = ({ card, className, clean, zero }: CardProp) => {
 
 	const dispatch = useAppDispatch();
 	return (
-		<div className={`relative`}>
+		<div className={`relative  `}>
 			<button
-				className={`overflow-hidden relative w-cell h-cell    border border-r-2 p-[3px] border-[#15323d] ]  flex justify-between    transition-all 
+				className={`relative  border border-r-2 p-[3px] border-[#15323d] ]  flex justify-between    transition-all 
 			${clean || playerMoving?.position == id ? `ping z-20` : `hover:-translate-y-1`}
-			${clean ? `cursor-default` : 'hover:z-20 hover:opacity-90 hover:relative  cursor-pointer'}  ${
-					zero ? 'border-0' : 'border-b-2'
-				}`}
+			${
+				clean
+					? `cursor-default max-h-[90px] max-w-[90px] w-[calc(100vw/10)] h-[calc(100vw/10)] flex justify-between  items-center`
+					: 'hover:z-20 hover:opacity-90 hover:relative  cursor-pointer  h-cell w-cell '
+			}  ${zero ? 'border-0' : 'border-b-2'}`}
 				style={{ background: zero ? 'rgb(0,0,0,0)' : bg }}
 				onClick={() => {
 					const payload = { cardId: id, playerId: '' };
 
+					dispatch(gameSlice.actions.move(payload));
 					if (masterMoveId.length > 0) {
 						payload.playerId = masterMoveId;
 						dispatch(gameSlice.actions.setMasterMovePlayer(''));
 					}
-
-					dispatch(gameSlice.actions.move(payload));
 				}}
 				onContextMenu={(e) => {
 					e.preventDefault();
+					console.log({ visible: true, activeCard: id });
+
 					dispatch(interfaceSlice.actions.setThoughtsPopup({ visible: true, activeCard: id }));
 				}}>
 				<div className='flex flex-col w-full'>
@@ -66,7 +69,7 @@ const Card = ({ card, className, clean, zero }: CardProp) => {
 					)}
 
 					{!clean && (
-						<div className='absolute flex w-full left-0 bottom-0 justify-end index z-10'>
+						<div className='absolute flex w-full left-0 bottom-0 justify-end index z-10 overflow-hidden'>
 							<Position players={players} id={id} />
 						</div>
 					)}

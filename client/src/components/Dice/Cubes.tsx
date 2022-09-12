@@ -13,10 +13,14 @@ const Cubes = ({ onContextMenu }: CubesProp) => {
 
 	return (
 		<div
-			className=''
+			className='my-[-25px]'
+			onMouseDown={(e) => {
+				if (e.button === 2) {
+					onContextMenu();
+				}
+			}}
 			onContextMenu={(e) => {
 				e.preventDefault();
-				onContextMenu();
 			}}>
 			<div className='flex mb-4'>
 				<div

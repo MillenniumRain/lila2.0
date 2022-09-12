@@ -4,19 +4,20 @@ import ChakraCard from './ChakraCard';
 interface ChakraColumnProp {
 	children?: ReactNode;
 	className?: string;
+	clean?: boolean;
 }
 
-const ChakraColumn = ({ className }: ChakraColumnProp) => {
+const ChakraColumn = ({ className, clean = false }: ChakraColumnProp) => {
 	return (
 		<div className={`flex flex-col ${className}`}>
-			<ChakraCard chakra={0} />
-			<ChakraCard chakra={1} />
-			<ChakraCard chakra={2} />
-			<ChakraCard chakra={3} />
-			<ChakraCard chakra={4} />
-			<ChakraCard chakra={5} />
-			<ChakraCard chakra={6} />
-			<ChakraCard chakra={7} />
+			<ChakraCard chakra={0} clean={clean} />
+			<ChakraCard chakra={1} clean={clean} />
+			<ChakraCard chakra={2} clean={clean} />
+			<ChakraCard chakra={3} clean={clean} />
+			<ChakraCard chakra={4} clean={clean} />
+			<ChakraCard chakra={5} clean={clean} />
+			<ChakraCard chakra={6} clean={clean} />
+			<ChakraCard chakra={7} clean={clean} />
 		</div>
 	);
 };

@@ -30,6 +30,7 @@ export interface IPlayerParams {
 	disappointments: number;
 	ignored: boolean;
 	purpose: string;
+	master: string;
 }
 export interface IPlayer extends IPlayerParams {
 	id: string;
@@ -46,6 +47,7 @@ export const getInitialPLayer = (newParams: {}) => {
 		winner: false,
 		ignored: false,
 		disappointments: 0,
+		master: false,
 		purpose: '',
 		history: {
 			lastId: 0,
@@ -153,11 +155,12 @@ export const gameSlice = createSlice({
 		},
 		move: (state, action: PayloadAction<MovePayload>) => {
 			const cardId = action.payload.cardId;
-			const id = action.payload.playerId || state.id;
+			const id = state.masterMoveId || action.payload.playerId || state.id;
 			const index = state.players.findIndex((player) => player.id === id);
 
 			if (state.players[index].position === cardId) return;
 			if (!state.players[index].turn && !state.master) return;
+			if (!state.players[index].turn && state.master && !state.masterMoveId) return;
 
 			state.socket?.send(
 				JSON.stringify({

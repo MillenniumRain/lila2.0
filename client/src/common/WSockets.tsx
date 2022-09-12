@@ -65,7 +65,7 @@ const WSockets = ({ children }: WSocketsProp) => {
 			}
 		};
 	}, [name, password]);
-	return <>{children}</>;
+	return <div>{children}</div>;
 };
 
 export default WSockets;

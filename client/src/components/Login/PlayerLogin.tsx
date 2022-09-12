@@ -58,7 +58,7 @@ const PlayerLogin = ({}: PlayerLoginProp) => {
 			</div>
 			<button
 				type='submit'
-				className='p-2 border-2 border-orange-300 mb-4 text-orange-300 z-10  rounded-lg max-w-[200px] hover:bg-orange-300 hover:text-white bold'>
+				className='p-2 border-2 border-sky-700 mb-4 text-sky-700 z-10  rounded-lg max-w-[200px] hover:bg-sky-700 font-bold hover:text-white bold'>
 				Войти в игру
 			</button>
 		</form>

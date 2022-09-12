@@ -1,0 +1,186 @@
+{
+   "players": [
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий1832b40c82f"
+      },
+      {
+         "name": "Пссс дуйте из игры =D",
+         "color": "#fff",
+         "position": 0,
+         "figure": 3,
+         "turn": true,
+         "dice": 6,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Никита1832b4187ea"
+      },
+      {
+         "name": "Вика шо сидишь)",
+         "color": "#fff",
+         "position": 63,
+         "figure": 5,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "я играю на познай себя",
+         "history": {
+            "lastId": 26,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 1,
+                  "thoughtId": 1
+               },
+               {
+                  "id": 2,
+                  "cardId": 5
+               },
+               {
+                  "id": 3,
+                  "cardId": 14
+               },
+               {
+                  "id": 4,
+                  "cardId": 18
+               },
+               {
+                  "id": 5,
+                  "cardId": 6,
+                  "thoughtId": 2
+               },
+               {
+                  "id": 6,
+                  "cardId": 11,
+                  "thoughtId": 4
+               },
+               {
+                  "id": 8,
+                  "cardId": 13
+               },
+               {
+                  "id": 9,
+                  "cardId": 8
+               },
+               {
+                  "id": 10,
+                  "cardId": 11
+               },
+               {
+                  "id": 11,
+                  "cardId": 22
+               },
+               {
+                  "id": 12,
+                  "cardId": 9
+               },
+               {
+                  "id": 13,
+                  "cardId": 33,
+                  "thoughtId": 4
+               },
+               {
+                  "id": 14,
+                  "cardId": 37
+               },
+               {
+                  "id": 15,
+                  "cardId": 28
+               },
+               {
+                  "id": 16,
+                  "cardId": 21
+               },
+               {
+                  "id": 17,
+                  "cardId": 25
+               },
+               {
+                  "id": 18,
+                  "cardId": 21
+               },
+               {
+                  "id": 19,
+                  "cardId": 27
+               },
+               {
+                  "id": 20,
+                  "cardId": 19
+               },
+               {
+                  "id": 21,
+                  "cardId": 23
+               },
+               {
+                  "id": 22,
+                  "cardId": 55
+               },
+               {
+                  "id": 23,
+                  "cardId": 46
+               },
+               {
+                  "id": 24,
+                  "cardId": 50,
+                  "thoughtId": 7
+               },
+               {
+                  "id": 25,
+                  "cardId": 54
+               },
+               {
+                  "id": 26,
+                  "cardId": 63
+               }
+            ]
+         },
+         "id": "виктория1832b43adab"
+      },
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий1832b51c619"
+      }
+   ]
+}

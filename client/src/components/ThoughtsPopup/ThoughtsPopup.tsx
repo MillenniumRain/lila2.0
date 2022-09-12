@@ -30,7 +30,7 @@ const ThoughtsPopup = ({}: ThoughtsPopupProp) => {
 						</button>
 					</div>
 					{visibleShirt && (
-						<div className=' relative max-w-[650px] min-h-[400px]  rounded-3xl overflow-hidden   '>
+						<div className=' relative max-w-[650px]   rounded-3xl overflow-hidden   '>
 							<ThoughtsShirt
 								onContextMenu={(e) => {
 									e.preventDefault();

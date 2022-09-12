@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #popup {
-	position: relative;
-	z-index: 10;
-} */
+@layer utilities {
+	.text-outline {
+		text-shadow: 1px 1px 1px rgb(29 78 216);
+	}
+}
+
 .begin_card {
 	position: absolute;
 	left: -90px;
@@ -33,4 +35,7 @@
 .item-exit-active {
 	opacity: 0;
 	transition: opacity 500ms ease-in;
+}
+.text-shadow-white {
+	text-shadow: 0px 0px 10px #fff;
 }
