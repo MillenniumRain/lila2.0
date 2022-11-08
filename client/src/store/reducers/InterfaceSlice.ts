@@ -60,6 +60,9 @@ export const interfaceSlice = createSlice({
 		setLoginPopup: (state, action: PayloadAction<boolean>) => {
 			state.loginPopup = action.payload;
 		},
+		setPickedIdThought: (state, action: PayloadAction<number | null>) => {
+			state.pickedIdThought = action.payload;
+		},
 		setInstructionsPopup: (state, action: PayloadAction<boolean>) => {
 			state.instructionsPopup = action.payload;
 		},

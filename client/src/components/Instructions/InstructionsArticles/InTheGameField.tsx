@@ -21,7 +21,7 @@ const InTheGameField = ({ onClick }: InTheGameFieldProp) => {
 				<div className='indent-8 '>
 					клик ПКМ (правая кнопка мыши) по ячейке, откроет карточку{' '}
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer '
+						className='inline text-sky-600 hover:underline cursor-pointer '
 						onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 							onClick(e, 'Карточка');
 						}}>

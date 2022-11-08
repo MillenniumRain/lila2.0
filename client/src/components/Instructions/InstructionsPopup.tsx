@@ -59,7 +59,7 @@ const InstructionsPopup = ({}: InstructionsPopupProp) => {
 							})}
 						</div>
 						<div className='absolute right-0 top-0 h-full flex items-center'>
-							<div className='h-[90%] w-[3px] bg-sky-700 rounded-[50%]'></div>
+							<div className='h-[90%] w-[3px] bg-sky-600 rounded-[50%]'></div>
 						</div>
 					</div>
 					<div className='w-3/4 h-full p-4 pb-8 text-justify relative bg-white to450:w-[68%] relative'>
@@ -74,7 +74,7 @@ const InstructionsPopup = ({}: InstructionsPopupProp) => {
 
 						{ref.current ? (
 							<button
-								className='absolute bottom-0 left-0 fill-sky-700 font-bold py-1 px-4 text-lg   hover:fill-orange-300'
+								className='absolute bottom-0 left-0 fill-sky-600 font-bold py-1 px-4 text-lg   hover:fill-orange-300'
 								onClick={() => {
 									handleClick(ref.current);
 									ref.current = '';
@@ -83,7 +83,7 @@ const InstructionsPopup = ({}: InstructionsPopupProp) => {
 							</button>
 						) : null}
 						<button
-							className='absolute bottom-0 right-0 text-sky-700 font-bold py-1 px-4 text-lg  hover:text-orange-300'
+							className='absolute bottom-0 right-0 text-sky-600 font-bold py-1 px-4 text-lg  hover:text-orange-300'
 							onClick={() => {
 								handleClick(next);
 							}}>

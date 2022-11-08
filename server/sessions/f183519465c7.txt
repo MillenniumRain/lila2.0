@@ -1,28 +1,28 @@
 {
    "players": [
       {
-         "name": "Ведущий",
+         "name": "55",
          "color": "#fff",
-         "position": 3,
-         "figure": 1,
-         "turn": false,
+         "position": 10,
+         "figure": 9,
+         "turn": true,
          "dice": null,
          "disconnected": true,
          "winner": false,
          "ignored": false,
          "disappointments": 0,
-         "master": true,
+         "master": false,
          "purpose": "",
          "history": {
             "lastId": 1,
             "list": [
                {
                   "id": 1,
-                  "cardId": 3
+                  "cardId": 10
                }
             ]
          },
-         "id": "Ведущий1832b4aed3f"
+         "id": "55183519f2c3f"
       }
    ]
 }

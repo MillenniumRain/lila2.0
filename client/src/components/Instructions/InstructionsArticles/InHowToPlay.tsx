@@ -18,7 +18,7 @@ const InHowToPlay = ({ onClick }: InHowToPlayProp) => {
 				<div className='mb-4'>
 					3. Бросайте кубик и ходите на выпавшее число, кликом левой кнопки мыши на ячейку игрового поля{' '}
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+						className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 						onClick={(e: React.MouseEvent<HTMLDivElement>) => {
 							onClick(e, 'Игровое поле');
 						}}>
@@ -29,7 +29,7 @@ const InHowToPlay = ({ onClick }: InHowToPlayProp) => {
 					4. Кликнув правой кнопкой мыши на ячейку (где находится ваша фигура) игрового поля, откроется
 					карточка, внизу карточки
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+						className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 						onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 							onClick(e, 'Карточка');
 						}}>
@@ -43,7 +43,7 @@ const InHowToPlay = ({ onClick }: InHowToPlayProp) => {
 					не совпадает с цифрами на карточке, то перевенув ее вы можете выбрать кликом одну из противоречивых
 					цитат на ваш выбор. Затем ход передается другому игроку, кнопкой "завершить ход"{' '}
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+						className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 						onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 							onClick(e, 'Кубик');
 						}}>
@@ -55,7 +55,7 @@ const InHowToPlay = ({ onClick }: InHowToPlayProp) => {
 				<div className='mb-4'>
 					6. Если игра отправила вас на "ноль", то вы либо заходите в игру с "разочарованием"
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+						className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 						onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 							onClick(e, 'Разочарование');
 						}}>

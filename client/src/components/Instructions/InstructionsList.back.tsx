@@ -41,7 +41,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className='mb-4'>
 				3. Бросайте кубик и ходите на выпавшее число, кликом левой кнопки мыши на ячейку игрового поля{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Игровое поле');
 					}}>
@@ -52,7 +52,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				4. Кликнув правой кнопкой мыши на ячейку (где находится ваша фигура) игрового поля, откроется карточка,
 				внизу карточки
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Карточка');
 					}}>
@@ -66,7 +66,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				совпадает с цифрами на карточке, то перевенув ее вы можете выбрать кликом одну из противоречивых цитат
 				на ваш выбор. Затем ход передается другому игроку, кнопкой "завершить ход"{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Кубик');
 					}}>
@@ -78,7 +78,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className='mb-4'>
 				6. Если игра отправила вас на "ноль", то вы либо заходите в игру с "разочарованием"
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Разочарование');
 					}}>
@@ -123,7 +123,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className=' '>
 				Ведущий вводит пароль дающий право к дополнительным возможностям
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Интерфейс ведущего');
 					}}>
@@ -159,7 +159,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 					<div>
 						<div className='inline font-bold'>1. История ходов</div>{' '}
 						<div
-							className='inline text-sky-700 hover:underline cursor-pointer '
+							className='inline text-sky-600 hover:underline cursor-pointer '
 							onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 								onClick(e, 'История ходов');
 							}}>
@@ -170,7 +170,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 							Первой строкой в списке отображается, подключился ли ведущий или нет (то как видит это
 							ведущий{' '}
 							<div
-								className='inline text-sky-700 hover:underline cursor-pointer '
+								className='inline text-sky-600 hover:underline cursor-pointer '
 								onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 									onClick(e, 'Интерфейс ведущего');
 								}}>
@@ -182,7 +182,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 							Каждый игрок отображается в порядке <br /> подключение к комнате (к игре). Сперва значок
 							"персоны", он показывает вас в списке. Затем имя игрока, потом выброшенный кубик{' '}
 							<div
-								className='inline text-sky-700 hover:underline cursor-pointer '
+								className='inline text-sky-600 hover:underline cursor-pointer '
 								onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 									onClick(e, 'Кубик');
 								}}>
@@ -199,7 +199,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className=' italic'>Игрок, который ходит, подсвечивается белым.</div>
 			<div className='inline font-bold'>3. Синхронизироваться с полем</div>{' '}
 			<div
-				className='inline text-sky-700 hover:underline cursor-pointer '
+				className='inline text-sky-600 hover:underline cursor-pointer '
 				onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 					onClick(e, 'Поле синхронизации');
 				}}>
@@ -221,7 +221,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				<div className='indent-8 '>
 					клик ПКМ (правая кнопка мыши) по ячейке, откроет карточку{' '}
 					<div
-						className='inline text-sky-700 hover:underline cursor-pointer '
+						className='inline text-sky-600 hover:underline cursor-pointer '
 						onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 							onClick(e, 'Карточка');
 						}}>
@@ -250,7 +250,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className='mb-4'>
 				При нажатии на ячейку на игровом поле{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Карточка');
 					}}>
@@ -340,7 +340,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 			<div className='mb-4'>
 				Ниже представлен пример истории ходов. "№ поля" - это номер ячейки на игровом поле{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Игровое поле');
 					}}>
@@ -348,7 +348,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				</div>
 				. "№ позиции" - это то что вы выбираете на обратной стороне карточки при завершении хода{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Карточка');
 					}}>
@@ -369,7 +369,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				Разочарование получается когда вас игра выбрасывает на ноль и вы решаетесь не менять цель и зайти в игру
 				снова, тогда ведущий выдаст вам карточку "разочарование"{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Интерфейс ведущего');
 					}}>
@@ -418,7 +418,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				Ведущий получает право кликать на игроков (клик по имени) открывает меню с дополнительными
 				возможностями. Двойной клик на игроке открывает его историю{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'История / Цель');
 					}}>
@@ -437,7 +437,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				<div className='inline font-bold'>Передвинуть:</div> при нажатии загорается зеленым в этот момент вы
 				можете передвинуть игрока на любую ячейку игрового поля{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Игровое поле');
 					}}>
@@ -455,7 +455,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				<div className='inline font-bold'>Разочарование:</div> плюсом и минусом можно изменять количество
 				разочарований у игрока, разочарования у игрока отображаются под играольной костью{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Разочарование');
 					}}>
@@ -472,7 +472,7 @@ const InstructionsList = ({ title, onClick }: InstructionsListProp) => {
 				<div className='inline font-bold'>Новая игра:</div> ставит игрока на нулевую клетку, обнуляет историию и
 				цель{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'История / Цель');
 					}}>

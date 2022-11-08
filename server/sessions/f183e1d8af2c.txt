@@ -1,0 +1,75 @@
+{
+   "players": [
+      {
+         "name": "Никита",
+         "color": "#fff",
+         "position": 26,
+         "figure": 0,
+         "turn": true,
+         "dice": 3,
+         "disconnected": false,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 8,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 1
+               },
+               {
+                  "id": 2,
+                  "cardId": 20
+               },
+               {
+                  "id": 3,
+                  "cardId": 26
+               },
+               {
+                  "id": 4,
+                  "cardId": 45
+               },
+               {
+                  "id": 5,
+                  "cardId": 38
+               },
+               {
+                  "id": 6,
+                  "cardId": 29
+               },
+               {
+                  "id": 7,
+                  "cardId": 34
+               },
+               {
+                  "id": 8,
+                  "cardId": 42
+               }
+            ]
+         },
+         "id": "Никита183e1d8c814"
+      },
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий183e1db7709"
+      }
+   ]
+}

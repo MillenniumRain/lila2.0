@@ -1,0 +1,23 @@
+{
+   "players": [
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": false,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий18350e39f39"
+      }
+   ]
+}

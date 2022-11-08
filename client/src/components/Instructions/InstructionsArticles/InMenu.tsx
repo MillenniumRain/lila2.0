@@ -21,7 +21,7 @@ const InMenu = ({ onClick }: InMenuProp) => {
 					<div>
 						<div className='inline font-bold'>1. История ходов</div>{' '}
 						<div
-							className='inline text-sky-700 hover:underline cursor-pointer '
+							className='inline text-sky-600 hover:underline cursor-pointer '
 							onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 								onClick(e, 'История / Цель');
 							}}>
@@ -32,7 +32,7 @@ const InMenu = ({ onClick }: InMenuProp) => {
 							Первой строкой в списке отображается, подключился ли ведущий или нет (то как видит это
 							ведущий{' '}
 							<div
-								className='inline text-sky-700 hover:underline cursor-pointer '
+								className='inline text-sky-600 hover:underline cursor-pointer '
 								onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 									onClick(e, 'Интерфейс ведущего');
 								}}>
@@ -44,7 +44,7 @@ const InMenu = ({ onClick }: InMenuProp) => {
 							Каждый игрок отображается в порядке <br /> подключение к комнате (к игре). Сперва значок
 							"персоны", он показывает вас в списке. Затем имя игрока, потом выброшенный кубик{' '}
 							<div
-								className='inline text-sky-700 hover:underline cursor-pointer '
+								className='inline text-sky-600 hover:underline cursor-pointer '
 								onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 									onClick(e, 'Кубик');
 								}}>
@@ -61,7 +61,7 @@ const InMenu = ({ onClick }: InMenuProp) => {
 			<div className=' italic'>Игрок, который ходит, подсвечивается белым.</div>
 			<div className='inline font-bold'>3. Синхронизироваться с полем</div>{' '}
 			<div
-				className='inline text-sky-700 hover:underline cursor-pointer '
+				className='inline text-sky-600 hover:underline cursor-pointer '
 				onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 					onClick(e, 'Поле синхронизации');
 				}}>

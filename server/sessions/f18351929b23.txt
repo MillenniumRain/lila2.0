@@ -1,0 +1,52 @@
+{
+   "players": [
+      {
+         "name": "Никита",
+         "color": "#fff",
+         "position": 28,
+         "figure": 9,
+         "turn": true,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 7,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 2
+               },
+               {
+                  "id": 2,
+                  "cardId": 11
+               },
+               {
+                  "id": 3,
+                  "cardId": 20
+               },
+               {
+                  "id": 4,
+                  "cardId": 30
+               },
+               {
+                  "id": 5,
+                  "cardId": 39
+               },
+               {
+                  "id": 6,
+                  "cardId": 29
+               },
+               {
+                  "id": 7,
+                  "cardId": 28
+               }
+            ]
+         },
+         "id": "Никита1835192a739"
+      }
+   ]
+}

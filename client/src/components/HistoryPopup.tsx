@@ -15,10 +15,10 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 	const gameMap = useAppSelector((state) => state.game.gameMap);
 	const activePlayerId = useAppSelector((state) => state.interface.activePlayerId) || id;
 	const index = players.findIndex((player) => player.id == (activePlayerId || id));
-	const history = players[index].history || { list: [], maxId: 1 };
+	const history = index >= 0 ? players[index].history : { list: [], maxId: 1 };
 
 	const [visibleInput, setVisibleInput] = useState(false);
-	const [purpose, setPurpose] = useState(players[index].purpose);
+	const [purpose, setPurpose] = useState(players[index]?.purpose || '');
 
 	const dispatch = useAppDispatch();
 
@@ -100,16 +100,19 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 		input = [];
 	}
 
+	const closePopup = () => {
+		if (visibleInput) {
+			dispatch(gameSlice.actions.setPurpose(purpose));
+		}
+		dispatch(interfaceSlice.actions.setHistoryPopup({ visible: false }));
+	};
 	return (
 		<div className=''>
 			<Popup
 				onClose={() => {
-					if (visibleInput) {
-						dispatch(gameSlice.actions.setPurpose(purpose));
-					}
-					dispatch(interfaceSlice.actions.setHistoryPopup({ visible: false }));
+					closePopup();
 				}}>
-				<div className='bg-white  w-[800px] h-2/3 z-10 py-10 px-20 to450:px-4 overflow-x-auto'>
+				<div className='relative bg-white  w-[800px] h-2/3 z-10 py-10 px-20 to450:px-4 overflow-x-auto'>
 					<div className=''>
 						<div
 							className={`py-1 mb-2 text-lg   cursor-pointer group flex justify-between items-center`}
@@ -137,7 +140,7 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 										}}
 										autoFocus
 										type='text'
-										className='w-full border-b-2 focus:outline-none focus:border-green-500 mr-2'
+										className='w-full border-b-2 focus:outline-none focus:border-sky-600 mr-2'
 									/>
 								</form>
 							) : (
@@ -149,6 +152,13 @@ const HistoryPopup = ({}: HistoryPopupProp) => {
 
 						{<div className='text-lg font-bold mb-2'>История</div>}
 						{output.length === 0 ? <div className=''>Истории нет</div> : output}
+					</div>
+					<div
+						className='absolute right-0 top-0 hover:fill-sky-600   fill-black p-2  cursor-pointer'
+						onClick={() => {
+							closePopup();
+						}}>
+						<CloseSvg className=' ' />
 					</div>
 				</div>
 			</Popup>

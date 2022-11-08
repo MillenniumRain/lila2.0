@@ -5,9 +5,9 @@
          "color": "#fff",
          "position": 0,
          "figure": 0,
-         "turn": false,
-         "dice": 3,
-         "disconnected": true,
+         "turn": true,
+         "dice": null,
+         "disconnected": false,
          "winner": false,
          "ignored": false,
          "disappointments": 0,
@@ -17,7 +17,7 @@
             "lastId": 0,
             "list": []
          },
-         "id": "Никита1832b51fd89"
+         "id": "Никита1834699b8d8"
       }
    ]
 }

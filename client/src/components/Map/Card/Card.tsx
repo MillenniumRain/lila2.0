@@ -44,8 +44,6 @@ const Card = ({ card, className, clean = false, zero }: CardProp) => {
 				}}
 				onContextMenu={(e) => {
 					e.preventDefault();
-					console.log({ visible: true, activeCard: id });
-
 					dispatch(interfaceSlice.actions.setThoughtsPopup({ visible: true, activeCard: id }));
 				}}>
 				<div className='flex flex-col w-full'>

@@ -7,11 +7,11 @@ import Arrows from './Arrows';
 interface ThoughtsListProp {
 	children?: ReactNode;
 	onContextMenu: (e: MouseEvent) => void;
+	activeCardId: number;
 }
 
-const ThoughtsList = ({ onContextMenu }: ThoughtsListProp) => {
+const ThoughtsList = ({ onContextMenu, activeCardId }: ThoughtsListProp) => {
 	const dispatch = useAppDispatch();
-	const activeCardId = useAppSelector((state) => state.interface.activeCard) || 0;
 	const { name, description, id } = useAppSelector((state) => state.game.gameMap[activeCardId]);
 	const pickedIdThought = useAppSelector((state) => state.interface.pickedIdThought);
 

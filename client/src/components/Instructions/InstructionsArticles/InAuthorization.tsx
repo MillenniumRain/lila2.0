@@ -25,7 +25,7 @@ const InAuthorization = ({ onClick }: InAuthorizationProp) => {
 			<div className=' '>
 				Ведущий вводит пароль дающий право к дополнительным возможностям
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer ml-1'
+					className='inline text-sky-600 hover:underline cursor-pointer ml-1'
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Интерфейс ведущего');
 					}}>

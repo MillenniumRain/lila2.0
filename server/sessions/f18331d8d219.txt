@@ -1,0 +1,177 @@
+{
+   "players": [
+      {
+         "name": "Никита",
+         "color": "#fff",
+         "position": 0,
+         "figure": 8,
+         "turn": true,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 2,
+         "master": false,
+         "purpose": "Развитие астрального зрения и видения тонкого плана",
+         "history": {
+            "lastId": 26,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 4,
+                  "thoughtId": 2
+               },
+               {
+                  "id": 2,
+                  "cardId": 8,
+                  "thoughtId": 1
+               },
+               {
+                  "id": 3,
+                  "cardId": 10
+               },
+               {
+                  "id": 4,
+                  "cardId": 27,
+                  "thoughtId": 2
+               },
+               {
+                  "id": 5,
+                  "cardId": 33
+               },
+               {
+                  "id": 6,
+                  "cardId": 12,
+                  "thoughtId": 3
+               },
+               {
+                  "id": 7,
+                  "cardId": 16,
+                  "thoughtId": 1
+               },
+               {
+                  "id": 8,
+                  "cardId": 21
+               },
+               {
+                  "id": 9,
+                  "cardId": 27,
+                  "thoughtId": 5
+               },
+               {
+                  "id": 10,
+                  "cardId": 29
+               },
+               {
+                  "id": 11,
+                  "cardId": 47
+               },
+               {
+                  "id": 12,
+                  "cardId": 2
+               },
+               {
+                  "id": 13,
+                  "cardId": 8
+               },
+               {
+                  "id": 14,
+                  "cardId": 11,
+                  "thoughtId": 3
+               },
+               {
+                  "id": 15,
+                  "cardId": 17
+               },
+               {
+                  "id": 16,
+                  "cardId": 22
+               },
+               {
+                  "id": 17,
+                  "cardId": 64
+               },
+               {
+                  "id": 18,
+                  "cardId": 49,
+                  "thoughtId": 1
+               },
+               {
+                  "id": 19,
+                  "cardId": 50
+               },
+               {
+                  "id": 20,
+                  "cardId": 49,
+                  "thoughtId": 4
+               },
+               {
+                  "id": 21,
+                  "cardId": 53,
+                  "thoughtId": 6
+               },
+               {
+                  "id": 22,
+                  "cardId": 59,
+                  "thoughtId": 2
+               },
+               {
+                  "id": 23,
+                  "cardId": 60
+               },
+               {
+                  "id": 24,
+                  "cardId": 0
+               },
+               {
+                  "id": 25,
+                  "cardId": 5
+               },
+               {
+                  "id": 26,
+                  "cardId": 0
+               }
+            ]
+         },
+         "id": "Никита18331d93220"
+      },
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий18331e5bf82"
+      },
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 0,
+         "figure": 1,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": true,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Ведущий18331e73577"
+      }
+   ]
+}

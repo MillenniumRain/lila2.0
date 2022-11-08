@@ -7,7 +7,8 @@ import Cubes from './Cubes';
 import DiceTemplate from './DiceTemplate';
 import Disappointment from './Disappointment';
 import { ReactComponent as SvgDice } from './../../assets/svg/dice-svgrepo-com.svg';
-import { ReactComponent as SvgClose } from './../../assets/svg/close-svgrepo-com.svg';
+// import { ReactComponent as SvgClose } from './../../assets/svg/close-svgrepo-com.svg';
+import { ReactComponent as SvgClose } from './../../assets/svg/double-arrow-left-svgrepo-com.svg';
 import { ReactComponent as SvgDices } from './../../assets/svg/two-dices-svgrepo-com.svg';
 import { ReactComponent as SvgCubeDice } from './../../assets/svg/big-dice-svgrepo-com.svg';
 
@@ -65,20 +66,20 @@ const Dice = ({}: DiceProp) => {
 	return (
 		<div
 			className={`fixed h-screen flex items-center justify-center  flex-col top-0  w-[340px] transition-[right]  bg-black/50  to450:bg-black/90 ${
-				hideMenu ? '-right-[340px] z-30' : 'right-0  to450:w-[calc(100vw-40px)] z-40'
+				hideMenu ? '-right-[340px] z-30' : 'right-0  to450:w-[calc(100vw-40px)] z-50'
 			}`}>
 			<button
 				onClick={() => {
 					setHideMenu((prev) => !prev);
 				}}
-				className='absolute block justify-center  items-center w-[40px] h-[40px] top-0 left-[-40px]  fill-white hover:scale-105 '>
+				className='absolute block justify-center  items-center w-[40px] h-[40px] top-0 left-[-40px]  fill-white group'>
 				{hideMenu ? (
 					<div className='p-1'>
 						<SvgDice />
 					</div>
 				) : (
-					<div className={`fill-white bg-black/90 w-full h-full flex justify-center items-center`}>
-						<SvgClose />
+					<div className={`fill-white bg-black/90 w-full h-full flex justify-center items-center group`}>
+						<SvgClose className=' w-[25px] group-hover:scale-[120%] rotate-180' />
 					</div>
 				)}
 			</button>

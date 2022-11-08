@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import Imgp from '../../../common/Imgp';
 import purpose from '../../../assets/img/instructions/purpose.webp';
 import history from '../../../assets/img/instructions/history.webp';
+import cardArrow from '../../../assets/img/instructions/cardArrow.webp';
 
 interface InHistoryOfMovesGoalProp {
 	children?: ReactNode;
@@ -23,7 +24,7 @@ const InHistoryOfMovesGoal = ({ onClick }: InHistoryOfMovesGoalProp) => {
 			<div className='mb-4'>
 				Ниже представлен пример истории ходов. "№ поля" - это номер ячейки на игровом поле{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Игровое поле');
 					}}>
@@ -31,7 +32,7 @@ const InHistoryOfMovesGoal = ({ onClick }: InHistoryOfMovesGoalProp) => {
 				</div>
 				. "№ позиции" - это то что вы выбираете на обратной стороне карточки при завершении хода{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Карточка');
 					}}>
@@ -41,6 +42,13 @@ const InHistoryOfMovesGoal = ({ onClick }: InHistoryOfMovesGoalProp) => {
 			</div>
 			<div>
 				<Imgp src={history} alt='История ходов' />
+			</div>
+			<div className='mb-4'>
+				Кликнув например на ячейку с номером поля 36, откроется карточка со стрелками влева и вправо которые
+				будут перемещать по истории
+			</div>
+			<div>
+				<Imgp src={cardArrow} alt='История ходов' />
 			</div>
 		</div>
 	);

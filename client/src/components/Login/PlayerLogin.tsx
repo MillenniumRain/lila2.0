@@ -1,9 +1,8 @@
 import React, { ReactNode, useState } from 'react';
-import { figures } from '../../data/figures';
 import { useAppDispatch } from '../../hooks/hooks';
 import { gameSlice } from '../../store/reducers/GameSlice';
 import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
-import Figure from '../Figure';
+import Figures from './Figures';
 
 interface PlayerLoginProp {
 	children?: ReactNode;
@@ -27,7 +26,7 @@ const PlayerLogin = ({}: PlayerLoginProp) => {
 					<div className='text-lg font-bold  '>Введите имя</div>
 					<input
 						autoFocus
-						className='w-full border-b-[1px] mt-[-15px] bg-white/0 border-slate-400 py-2 outline-none focus:border-b-slate-700 focus:border-b-2'
+						className='w-full border-b-[1px] mt-[-15px] bg-white/0 border-slate-400 py-2 outline-none focus:border-b-sky-600 focus:border-b-2'
 						type='text'
 						placeholder='Имя'
 						value={name}
@@ -38,27 +37,17 @@ const PlayerLogin = ({}: PlayerLoginProp) => {
 				</div>
 				<div className='mb-4'>
 					<div className='text-lg font-bold mb-1'>Выберите фишку для игры</div>
-					<div className='w-full flex justify-around'>
-						{figures.map((fig, index) => {
-							return (
-								<div
-									className={`hover:bg-slate-200 rounded-lg cursor-pointer ${
-										figure == index && 'bg-orange-300'
-									}`}
-									key={index}
-									onClick={() => {
-										setFigure(index);
-									}}>
-									<Figure animation={true} className={`w-[45px] `} id={index} />
-								</div>
-							);
-						})}
-					</div>
+					<Figures
+						figure={figure}
+						setFigure={(index) => {
+							setFigure(index);
+						}}
+					/>
 				</div>
 			</div>
 			<button
 				type='submit'
-				className='p-2 border-2 border-sky-700 mb-4 text-sky-700 z-10  rounded-lg max-w-[200px] hover:bg-sky-700 font-bold hover:text-white bold'>
+				className='p-2 border-2 border-sky-600 mb-4 text-sky-600 z-10  rounded-lg max-w-[200px] hover:bg-sky-600 font-bold hover:text-white bold'>
 				Войти в игру
 			</button>
 		</form>

@@ -6,6 +6,8 @@ import manipura from './../assets/img/icons8-manipura-100.png';
 import muladhara from './../assets/img/icons8-muladhara-100.png';
 import svadhishthana from './../assets/img/icons8-svadhishthana-100.png';
 import godchakra from './../assets/img/godchakra.png';
+import coin from './../assets/img/russia-сoin.webp';
+import owl from './../assets/img/owl.png';
 
 const chakra = 'block rounded-full p-[2px] ';
 export const figures = [
@@ -32,5 +34,11 @@ export const figures = [
 	</div>,
 	<div className={chakra}>
 		<img src={muladhara} alt='' />
+	</div>,
+	<div className={chakra}>
+		<img src={coin} alt='' />
+	</div>,
+	<div className={chakra}>
+		<img src={owl} alt='' />
 	</div>,
 ];

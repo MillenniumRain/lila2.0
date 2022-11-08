@@ -1,0 +1,83 @@
+{
+   "players": [
+      {
+         "name": "зажимая на кубике)",
+         "color": "#fff",
+         "position": 0,
+         "figure": 0,
+         "turn": false,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 0,
+            "list": []
+         },
+         "id": "Никита18354d8b086"
+      },
+      {
+         "name": "Конфликт",
+         "color": "#fff",
+         "position": 0,
+         "figure": 8,
+         "turn": true,
+         "dice": 6,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": false,
+         "purpose": "",
+         "history": {
+            "lastId": 10,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 6
+               },
+               {
+                  "id": 2,
+                  "cardId": 7
+               },
+               {
+                  "id": 3,
+                  "cardId": 6
+               },
+               {
+                  "id": 4,
+                  "cardId": 21
+               },
+               {
+                  "id": 5,
+                  "cardId": 13
+               },
+               {
+                  "id": 6,
+                  "cardId": 12
+               },
+               {
+                  "id": 7,
+                  "cardId": 11
+               },
+               {
+                  "id": 8,
+                  "cardId": 10
+               },
+               {
+                  "id": 9,
+                  "cardId": 1
+               },
+               {
+                  "id": 10,
+                  "cardId": 0
+               }
+            ]
+         },
+         "id": "кто я18354d8b601"
+      }
+   ]
+}

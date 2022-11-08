@@ -10,10 +10,10 @@ import HistoryPopup from './HistoryPopup';
 import LoginPopup from './Login/LoginPopup';
 import Map from './Map/Map';
 import Menu from './Menu/Menu';
-import ThoughtsPopup from './ThoughtsPopup/ThoughtsPopup';
 import ChakraColumn from './Map/ChakraColumn';
 import { interfaceSlice } from '../store/reducers/InterfaceSlice';
 import InstructionsPopup from './Instructions/InstructionsPopup';
+import ThoughtsPopup from './ThoughtsPopup/ThoughtsPopup';
 
 interface LilaProp {
 	children?: ReactNode;
@@ -25,7 +25,6 @@ const Lila = ({}: LilaProp) => {
 	const historyPopup = useAppSelector((state) => state.interface.historyPopup);
 	const loginPopup = useAppSelector((state) => state.interface.loginPopup);
 	const instructionsPopup = useAppSelector((state) => state.interface.instructionsPopup);
-	// const [instructionsPopup, setInstructionsPopup] = useState(false);
 	const popups = thoughtsPopup || historyPopup || loginPopup || instructionsPopup;
 	const dataMap = [...useAppSelector((state) => state.game.gameMap)];
 	const zero = dataMap[0];

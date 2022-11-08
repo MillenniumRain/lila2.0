@@ -28,10 +28,10 @@ const Background = ({}: BackgroundProp) => {
 		let starsElements: any[] = [];
 
 		let frameAnim: any = null;
-		// window.onresize = function () {
-		// 	setupStars();
-		// 	updateStars();
-		// };
+		window.onresize = function () {
+			setupStars();
+			updateStars();
+		};
 		// star constructor
 		class Star {
 			x: number;
@@ -90,11 +90,11 @@ const Background = ({}: BackgroundProp) => {
 				starsElements[i] = new Star();
 			}
 		}
-		// setupStars();
-		// updateStars();
-		// return () => {
-		// 	window.onresize = null;
-		// };
+		setupStars();
+		updateStars();
+		return () => {
+			window.onresize = null;
+		};
 	}, []);
 	return (
 		<div className={`flex  fixed justify-center items-center top-0 left-0 right-0  bottom-0 flex-col `}>

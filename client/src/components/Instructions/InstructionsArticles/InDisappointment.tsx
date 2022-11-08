@@ -15,7 +15,7 @@ const InDisappointment = ({ onClick }: InDisappointmentProp) => {
 				Разочарование получается когда вас игра выбрасывает на ноль и вы решаетесь не менять цель и зайти в игру
 				снова, тогда ведущий выдаст вам карточку "разочарование"{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Интерфейс ведущего');
 					}}>

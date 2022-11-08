@@ -10,7 +10,7 @@ interface LoginPopupProp {
 const LoginPopup = ({}: LoginPopupProp) => {
 	const [selectedTab, setSelectedTab] = useState(0);
 	return (
-		<Popup onClose={() => {}}>
+		<Popup onClose={() => {}} zIndex={50}>
 			<div className='flex flex-col'>
 				<div className='flex z-10'>
 					<div

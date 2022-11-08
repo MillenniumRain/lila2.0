@@ -4,7 +4,8 @@ import { interfaceSlice } from '../../store/reducers/InterfaceSlice';
 import SynchronizationPopup from '../SynchronizationPopup';
 import MenuItem from './MenuItem';
 import { ReactComponent as SvgMenu } from './../../assets/svg/circular-menu-svgrepo-com.svg';
-import { ReactComponent as SvgClose } from './../../assets/svg/close-svgrepo-com.svg';
+// import { ReactComponent as SvgClose } from './../../assets/svg/close-svgrepo-com.svg';
+import { ReactComponent as SvgClose } from './../../assets/svg/double-arrow-left-svgrepo-com.svg';
 interface MenuProp {
 	children?: ReactNode;
 }
@@ -26,26 +27,28 @@ const Menu = ({}: MenuProp) => {
 		}
 	};
 	useEffect(() => {
-		setHideMenu(false);
+		if (window.screen.width > 1350) {
+			setHideMenu(false);
+		}
 	}, []);
 	return (
 		<div
 			className={`fixed top-0 w-[340px] transition-[left] h-screen  ${
-				hideMenu ? '-left-[calc(340px)] z-30' : 'left-0  to450:w-[calc(100vw-40px)] z-40'
+				hideMenu ? '-left-[calc(340px)] z-30' : 'left-0  to450:w-[calc(100vw-40px)] z-50'
 			} `}
 			style={{ maxHeight: '-webkit-fill-available' }}>
 			<button
 				onClick={() => {
 					setHideMenu((prev) => !prev);
 				}}
-				className='absolute block  w-[40px] h-[40px] top-0 right-[-40px] color-white  fill-white hover:scale-105 '>
+				className='absolute block  w-[40px] h-[40px] top-0 right-[-40px] color-white  fill-white  group'>
 				{hideMenu ? (
-					<div className='p-1'>
+					<div className='p-1 '>
 						<SvgMenu />
 					</div>
 				) : (
-					<div className={`fill-white bg-black/90 w-full h-full flex justify-center items-center`}>
-						<SvgClose />
+					<div className={`fill-white bg-black/90 w-full h-full flex justify-center items-center `}>
+						<SvgClose className=' w-[25px] group-hover:scale-[120%]' />
 					</div>
 				)}
 			</button>

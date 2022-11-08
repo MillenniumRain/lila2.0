@@ -1,0 +1,60 @@
+{
+   "players": [
+      {
+         "name": "Ведущий",
+         "color": "#fff",
+         "position": 46,
+         "figure": 1,
+         "turn": true,
+         "dice": null,
+         "disconnected": true,
+         "winner": false,
+         "ignored": false,
+         "disappointments": 0,
+         "master": true,
+         "purpose": "",
+         "history": {
+            "lastId": 9,
+            "list": [
+               {
+                  "id": 1,
+                  "cardId": 19
+               },
+               {
+                  "id": 2,
+                  "cardId": 45
+               },
+               {
+                  "id": 3,
+                  "cardId": 42
+               },
+               {
+                  "id": 4,
+                  "cardId": 18
+               },
+               {
+                  "id": 5,
+                  "cardId": 20
+               },
+               {
+                  "id": 6,
+                  "cardId": 30
+               },
+               {
+                  "id": 7,
+                  "cardId": 44
+               },
+               {
+                  "id": 8,
+                  "cardId": 36
+               },
+               {
+                  "id": 9,
+                  "cardId": 46
+               }
+            ]
+         },
+         "id": "Ведущий1833566312e"
+      }
+   ]
+}

@@ -30,7 +30,7 @@ const InHostInterface = ({ onClick }: InHostInterfaceProp) => {
 				Ведущий получает право кликать на игроков (клик по имени) открывает меню с дополнительными
 				возможностями. Двойной клик на игроке открывает его историю{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'История / Цель');
 					}}>
@@ -49,7 +49,7 @@ const InHostInterface = ({ onClick }: InHostInterfaceProp) => {
 				<div className='inline font-bold'>Передвинуть:</div> при нажатии загорается зеленым в этот момент вы
 				можете передвинуть игрока на любую ячейку игрового поля{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Игровое поле');
 					}}>
@@ -68,7 +68,7 @@ const InHostInterface = ({ onClick }: InHostInterfaceProp) => {
 				<div className='inline font-bold'>Разочарование:</div> плюсом и минусом можно изменять количество
 				разочарований у игрока, разочарования у игрока отображаются под играольной костью{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'Разочарование');
 					}}>
@@ -85,7 +85,7 @@ const InHostInterface = ({ onClick }: InHostInterfaceProp) => {
 				<div className='inline font-bold'>Новая игра:</div> ставит игрока на нулевую клетку, обнуляет историию и
 				цель{' '}
 				<div
-					className='inline text-sky-700 hover:underline cursor-pointer '
+					className='inline text-sky-600 hover:underline cursor-pointer '
 					onClick={(e: React.MouseEvent<HTMLInputElement>) => {
 						onClick(e, 'История / Цель');
 					}}>
